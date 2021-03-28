@@ -15,18 +15,15 @@ namespace Microsoft.eShopWeb.Web.Extensions
 
             services.AddParbad().SetMellat().ConfigStorage(ConnectionString).ConfigureHttpContext(builder => builder.UseDefaultAspNetCore())
                 .ConfigureAutoTrackingNumber(opt =>
-          opt.MinimumValue = 20000);
+          opt.MinimumValue = 0);
         }
-
-
 
         public static void AddVirtualPayment(this IServiceCollection services,string ConnectionString)
         {
             services.AddParbad().SetMockGatWay().ConfigStorage(ConnectionString).ConfigureHttpContext(builder => builder.UseDefaultAspNetCore())
                 .ConfigureAutoTrackingNumber(opt =>
-           opt.MinimumValue = 20000);
+           opt.MinimumValue = 0);
         }
-
 
         public static IParbadBuilder SetMockGatWay(this IParbadBuilder builder)
         {
@@ -61,7 +58,6 @@ namespace Microsoft.eShopWeb.Web.Extensions
 
             return builder;
         }
-
 
 
         public static IParbadBuilder ConfigStorage(this IParbadBuilder builder, string ConnectionString)

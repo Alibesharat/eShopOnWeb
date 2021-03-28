@@ -12,6 +12,7 @@ using Microsoft.eShopWeb.Infrastructure.Data;
 using Microsoft.eShopWeb.Infrastructure.Identity;
 using Microsoft.eShopWeb.Infrastructure.Logging;
 using Microsoft.eShopWeb.Infrastructure.Services;
+using Microsoft.eShopWeb.Web.Extensions;
 using Microsoft.eShopWeb.Web.Interfaces;
 using Microsoft.eShopWeb.Web.Services;
 using Microsoft.Extensions.Configuration;
@@ -41,6 +42,10 @@ namespace Microsoft.eShopWeb.Web
             // use in-memory database
             ConfigureInMemoryDatabases(services);
 
+
+          
+
+
             // use real database
             //ConfigureProductionServices(services);
         }
@@ -55,6 +60,7 @@ namespace Microsoft.eShopWeb.Web
             services.AddDbContext<AppIdentityDbContext>(options =>
                 options.UseInMemoryDatabase("Identity"));
 
+            services.AddVirtualPayment(Configuration.GetConnectionString("PaymentConnection"));
             ConfigureServices(services);
         }
 
@@ -78,6 +84,8 @@ namespace Microsoft.eShopWeb.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+          
+
             ConfigureCookieSettings(services);
 
             CreateIdentityIfNotCreated(services);
